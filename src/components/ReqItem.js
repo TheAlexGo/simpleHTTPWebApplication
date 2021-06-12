@@ -15,9 +15,9 @@ function ReqItem() {
   }
 
   return (
-    <div>
-      <input name="key" type="text" value={key} onChange={changeKey}/>
-      <input name="value" type="text" value={value} onChange={changeValue}/>
+    <div className="uk-flex">
+      <input className="uk-input" name="key" type="text" value={key} onChange={changeKey}/>
+      <input className="uk-input" name="value" type="text" value={value} onChange={changeValue}/>
     </div>
   )
 }

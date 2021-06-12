@@ -17,5 +17,17 @@ class HelperFunction {
     })
     return obj;
   }
+
+  static getFormData(obj) {
+    return Object.keys(obj).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])).join('&');
+  }
+
+  static getHeadersData(obj) {
+    const headers = new Headers();
+    for ( let key in obj ) {
+      if(obj.hasOwnProperty(key)) headers.append(key, obj[key]);
+    }
+    return headers;
+  }
 }
 export default HelperFunction;

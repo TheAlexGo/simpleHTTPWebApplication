@@ -12,12 +12,18 @@ function FillHeaderBlock() {
     )
   }
   return(
-    <fieldset name="header">
+    <fieldset name="header" className="uk-width-expand uk-margin-small-top">
       <legend>
         Заголовок запроса:
       </legend>
       { headerItems }
-      <button type="button" onClick={addHeaderItemFunc}>Добавить</button>
+      <button
+        className="uk-button uk-button-primary uk-width-expand uk-margin-small-top"
+        type="button"
+        onClick={addHeaderItemFunc}
+      >
+        Добавить
+      </button>
     </fieldset>
   )
 }
