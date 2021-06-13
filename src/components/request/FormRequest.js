@@ -8,6 +8,7 @@ import {useState} from "react";
 function FormRequest ({ createRequest }) {
   const methods = ['GET', 'POST', 'PUT', 'DELETE'];
   const [activeBody, setActiveBody] = useState(false);
+
   const sendForm = async (e) => {
     e.preventDefault();
     const $form = e.target;
@@ -41,7 +42,7 @@ function FormRequest ({ createRequest }) {
 
   const changeHandler = (e) => {
     const method = e.target.value;
-    if(method === 'POST' || method === 'PUT') {
+    if(method === 'POST' || method === 'PUT' || method === 'DELETE') {
       setActiveBody(true);
     } else {
       setActiveBody(false);

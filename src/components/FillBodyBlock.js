@@ -37,7 +37,7 @@ function FillBodyBlock () {
     <label key={index} className="uk-margin-small-right">
       <input
         onChange={changeMethod}
-        className="uk-radio"
+        className="uk-radio uk-margin-small-right"
         type="radio"
         name="test"
         checked={method === selectMethod} value={method}

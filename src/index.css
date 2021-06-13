@@ -1,7 +1,3 @@
-html {
-  /*background-color: #282c34;*/
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,11 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-legend {
-  /*color: #ffffff;*/
+label {
+  cursor: pointer;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+.request-block {
+  height: 400px;
+  overflow-y: auto;
 }

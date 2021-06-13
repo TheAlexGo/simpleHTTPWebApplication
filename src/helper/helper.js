@@ -83,15 +83,77 @@ class HelperFunction {
    * @returns {Promise<{result: any, dataHeaders: {}, method, dataRespHeaders: {}, dataBody: {}, link, status: number}>}
    */
   static async createRequest (link, data) {
-    const response = await fetch(link, data).catch(e => console.log(e));
-    const result = await response.json();
     const dataHeaders = HelperFunction.getDataFromResp(data.headers);
-
-    const dataRespHeaders = HelperFunction.getDataFromResp(response.headers);
-    const dataBody = HelperFunction.getBodyData(data.body)
+    const dataBody = HelperFunction.getBodyData(data.body);
     const method = data.method;
-    const status = response.status;
-    return { link, result, dataHeaders, dataRespHeaders, dataBody, method, status };
+    let result, status, dataRespHeaders;
+    try {
+      const response = await fetch(link, data);
+      result = await response.json();
+      dataRespHeaders = HelperFunction.getDataFromResp(response.headers);
+      status = response.status;
+    } catch (e) {
+      dataRespHeaders = {
+        headers: null
+      }
+      const protocol = link.split('://')[0];
+      if(protocol !== 'http' && protocol !== 'https') status = `Invalid protocol: ${protocol}`;
+      else status = `getaddrinfo ENOTFOUND  ${link}`;
+      result = {
+        status: status,
+        message: 'Could not send request'
+      };
+    }
+    return { link, result, dataHeaders, dataBody, method, dataRespHeaders, status };
+  }
+
+  /**
+   * Создание соединения с link по протоколу WebSocket
+   * @param link - ссылка
+   * @param refWsResultBlock - ref к информационному блоку
+   * @returns {WebSocket | number}
+   */
+  static createLinkWS (link, refWsResultBlock, setError) {
+    const protocol = link.split('://')[0];
+    if(protocol !== 'ws' && protocol !== 'wss') {
+      const div = document.createElement('div');
+      div.textContent = `Невозможно соединиться с данным ресурсом. Неверный протокол: ${protocol}.`;
+      refWsResultBlock.current.appendChild(div);
+      return 0;
+    }
+
+    const ws = new WebSocket(link);
+
+    ws.onopen = (e) => {
+      const div = document.createElement('div');
+      div.textContent = "Соединение установлено.";
+      refWsResultBlock.current.appendChild(div);
+    };
+
+    ws.onclose = (event) => {
+      const div = document.createElement('div');
+      if (event.wasClean) {
+        div.textContent = "Соединение закрыто чисто. ";
+      } else {
+        div.textContent = "Обрыв соединения. ";
+      }
+      div.textContent += `Код: ${event.code}, причина: ${event.reason}.`;
+      refWsResultBlock.current.appendChild(div);
+    };
+
+    ws.onmessage = (event) => {
+      const div = document.createElement('div');
+      div.textContent = `Получены данные: ${event.data}.`;
+      refWsResultBlock.current.appendChild(div);
+    };
+
+    ws.onerror = (error) => {
+      const div = document.createElement('div');
+      div.textContent = `Ошибка.`;
+      refWsResultBlock.current.appendChild(div);
+    };
+
+    return ws;
   }
 }
 export default HelperFunction;

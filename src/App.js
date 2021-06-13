@@ -9,8 +9,6 @@ function App() {
   const [allLink, setAllLink] = useState([]);
   const [dataModal, setDataModal] = useState(null);
 
-
-
   window.onload = () => {
     if(localStorage.allRequest) {
       setAllRequest(JSON.parse(localStorage.allRequest));
