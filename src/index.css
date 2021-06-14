@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-label {
+label, .req-item {
   cursor: pointer;
 }
 

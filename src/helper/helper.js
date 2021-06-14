@@ -12,7 +12,7 @@ class HelperFunction {
     if(allReqDiv.length) {
       allReqDiv.forEach(item => {
         const allInput = item.querySelectorAll('input');
-        const key = allInput[0].value;
+        const key = allInput[0].value.toLowerCase();
         const value = allInput[1].value;
         if(key && value) obj[key] = value;
       });

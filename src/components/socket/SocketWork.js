@@ -19,6 +19,7 @@ function SocketWork({ allLink, setAllLink, dataModal, setDataModal }) {
 
 
   const createLink = async (link) => {
+    if(socket) socket.close();
     const ws = HelperFunction.createLinkWS(link, refWsResultBlock);
     let status;
     if(ws !== 0) {
@@ -39,7 +40,7 @@ function SocketWork({ allLink, setAllLink, dataModal, setDataModal }) {
       <div className="uk-flex">
         <div className="uk-width-expand">
           <h3 className="uk-text-center">Соединение по WebSocket</h3>
-          {Boolean(allLink.length) && <pre ref={refWsResultBlock} />}
+          <pre ref={refWsResultBlock} className="request-block" />
         </div>
         <div className="uk-width-expand">
           <h3 className="uk-text-center">Прошлые соединения</h3>

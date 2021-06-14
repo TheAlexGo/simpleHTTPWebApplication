@@ -15,22 +15,24 @@ function FormRequest ({ createRequest }) {
 
     const methodRequest = $form.methodRequest?.querySelector('input:checked').value;
     const header = HelperFunction.getValue($form, 'header');
+    const body = HelperFunction.getValue($form, 'body');
 
-    switch (methodRequest) {
-      case 'form-data':
-        header['Content-Type'] = 'multipart/form-data';
-        break;
-      case 'x-www-form-urlencoded':
-        header['Content-Type'] = 'application/x-www-form-urlencoded';
-        break;
-      case 'raw':
-        header['Content-Type'] = 'application/json';
-        break;
-      default:
-        break;
+    if(!header['content-type']) {
+      switch (methodRequest) {
+        case 'form-data':
+          header['Content-Type'] = 'multipart/form-data';
+          break;
+        case 'x-www-form-urlencoded':
+          header['Content-Type'] = 'application/x-www-form-urlencoded';
+          break;
+        case 'raw':
+          header['Content-Type'] = 'application/json';
+          break;
+        default:
+          break;
+      }
     }
 
-    const body = HelperFunction.getValue($form, 'body');
     const url = $form.url.value;
     const data = {
       headers: header && HelperFunction.setHeadersData(header),

@@ -6,7 +6,6 @@ import HelperFunction from "../../helper/helper";
 
 function RequestWork({ allRequest, setAllRequest, dataModal, setDataModal }) {
   const [resultReq, setResultReq] = useState(null);
-  const [reqComplete, setReqComplete] = useState(true);
 
   function setDataModalFunc () {
     setDataModal(this);
@@ -17,8 +16,6 @@ function RequestWork({ allRequest, setAllRequest, dataModal, setDataModal }) {
   }
 
   const createRequest = async (link, data) => {
-    if(!reqComplete) setTimeout(await createRequest, 5000, link, data);
-
     const { result, dataHeaders, dataRespHeaders, dataBody, method, status } =
       await HelperFunction.createRequest(link, data);
 
@@ -28,9 +25,6 @@ function RequestWork({ allRequest, setAllRequest, dataModal, setDataModal }) {
     setResultReq(JSON.stringify(result, undefined, 2));
   }
 
-  useEffect(() => {
-    console.log(resultReq);
-  }, [resultReq]);
 
   return(
     <div>

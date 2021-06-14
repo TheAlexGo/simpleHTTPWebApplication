@@ -6,7 +6,7 @@ function AllRequestBlock ({allRequest, setDataModal}) {
           <div
             key={req.link + index}
             onClick={setDataModal.bind(req)}
-            className={String(req.status)[0] === '2' ? 'uk-text-success' : 'uk-text-danger'}
+            className={String(req.status)[0] === '2' ? 'req-item uk-text-success' : 'req-item uk-text-danger'}
           >
             {req.method}: {req.link}, status: {req.status}
           </div>)
