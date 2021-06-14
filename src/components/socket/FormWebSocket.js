@@ -1,4 +1,4 @@
-import Methods from "../Methods";
+import Methods from "../request/Methods";
 import {M_SEND} from "../../constants/message/main";
 
 function FormWebSocket ({ createLink }) {

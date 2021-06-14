@@ -1,6 +1,6 @@
 import {useState} from "react";
 import ReqItem from "./ReqItem";
-import {M_ADD, M_BODY_REQUEST, M_METHODS_DATA} from "../constants/message/main";
+import {M_ADD, M_BODY_REQUEST, M_METHODS_DATA} from "../../constants/message/main";
 
 function FillBodyBlock () {
   const [bodyItems, addBodyItem] = useState([]);

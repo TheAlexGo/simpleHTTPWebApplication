@@ -1,7 +1,7 @@
-import Methods from "../Methods";
+import Methods from "./Methods";
 import {M_SEND} from "../../constants/message/main";
-import FillHeaderBlock from "../FillHeaderBlock";
-import FillBodyBlock from "../FillBodyBlock";
+import FillHeaderBlock from "./FillHeaderBlock";
+import FillBodyBlock from "./FillBodyBlock";
 import HelperFunction from "../../helper/helper";
 import {useState} from "react";
 
